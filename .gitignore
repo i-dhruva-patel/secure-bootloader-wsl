@@ -1,0 +1,10 @@
+venv/
+*.o
+*.bin
+*.elf
+*.log
+__pycache__/
+mock_flash.bin
+venv/
+mock_flash.bin
+keys/private.pem
