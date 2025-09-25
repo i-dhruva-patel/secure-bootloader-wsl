@@ -1,4 +1,6 @@
 #include <stdint.h>
+#include <stdint.h>
+#include "boot_image.h"   
 
 #define APP_BASE_ADDR  0x00010000
 
@@ -26,9 +28,17 @@ void jump_to_app(void) {
 }
 
 int main(void) {
-    // Optional: check for valid app signature here in future
-    jump_to_app();
+    image_header_t *hdr = (image_header_t *)APP_BASE_ADDR;
 
-    while (1) { }
+    if (hdr->magic != APP_IMAGE_MAGIC) {
+        // Invalid image — stay in bootloader
+        while (1) { }
+    }
+
+    // Later: check version, verify signature, decrypt payload...
+
+    // If all good → jump to app
+    jump_to_app();
+    while (1);
 }
 
