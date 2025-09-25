@@ -7,8 +7,8 @@
 .size g_pfnVectors, .-g_pfnVectors
 
 .extern _estack
-.extern Reset_Handler
 
+.global Reset_Handler  @ <-- you missed this
 g_pfnVectors:
   .word _estack
   .word Reset_Handler
@@ -20,3 +20,4 @@ g_pfnVectors:
 Reset_Handler:
   bl main
   b .
+
